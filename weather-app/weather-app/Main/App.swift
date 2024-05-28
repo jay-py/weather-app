@@ -9,9 +9,20 @@ import SwiftUI
 
 @main
 struct app: App {
+    init() {
+        configureURLCache()
+    }
+    
     var body: some Scene {
         WindowGroup {
             RootView()
         }
+    }
+    
+    private func configureURLCache() {
+        let memoryCapacity = 50 * 1024 * 1024 // 50 MB
+        let diskCapacity = 100 * 1024 * 1024 // 100 MB
+        let cache = URLCache(memoryCapacity: memoryCapacity, diskCapacity: diskCapacity, diskPath: "WeatherAppCachePath")
+        URLCache.shared = cache
     }
 }

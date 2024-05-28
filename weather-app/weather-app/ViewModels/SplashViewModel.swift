@@ -10,6 +10,7 @@ import SwiftUI
 final class SplashViewModel: ObservableObject {
 
     @Published private(set) var isLoading: Bool = true
+    let animationDuration = 1.0 //second
 
     internal var state: State = .idle {
         willSet {
@@ -34,12 +35,13 @@ final class SplashViewModel: ObservableObject {
     }
 
     private func handleState(_ isError: Bool) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + animationDuration) {
             NotificationCenter.setAppState(to: isError ? .error : .home)
         }
     }
 
     private let TAG = "SplashViewModel"
+    
     internal enum State {
         case success, error, idle
     }
