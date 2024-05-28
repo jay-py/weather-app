@@ -1,0 +1,19 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "error" : {
+
+    },
+    "splash_title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Weather APP"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
