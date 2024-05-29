@@ -17,7 +17,7 @@ final class SearchViewModel: ObservableObject {
     private var bag = Set<AnyCancellable>()
     
     @Published private(set) var locations = [Locations.Location]()
-    @Published private(set) var result: Temprature? = nil
+    @Published private(set) var temprature: Temprature? = nil
     @Published var query: String = ""
     
     init() {
@@ -26,12 +26,12 @@ final class SearchViewModel: ObservableObject {
             .removeDuplicates()
             .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
             .sink { newValue in
-                self.fetchLocations(query: newValue)
+                self.getLocations(query: newValue)
             }
             .store(in: &bag)
     }
     
-    private func fetchLocations(query: String) {
+    internal func getLocations(query: String) {
         if query.isEmpty {
             self.setLocations(nil)
         } else {
@@ -72,7 +72,7 @@ final class SearchViewModel: ObservableObject {
         Task {
             do {
                 let temprature = try await repo.getTemprature(lat: location.lat, lon: location.lon)
-                self.result = temprature
+                self.temprature = temprature
                 print(">> success getting temprature for \(location): \(temprature)")
             }
             catch {

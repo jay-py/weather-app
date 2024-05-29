@@ -27,7 +27,7 @@ struct SearchView: View {
         )
         .tint(Color.themeColor)
         .searchBarTint()
-        .onReceive(vm.$result, perform: { value in
+        .onReceive(vm.$temprature, perform: { value in
             if let value {
                 self.result = value
                 self.isPresented.toggle()
