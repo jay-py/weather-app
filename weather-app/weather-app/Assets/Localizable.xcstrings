@@ -1,11 +1,54 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    " (%@)" : {
+
+    },
+    "%@ " : {
+
+    },
     "error" : {
 
     },
-    "Hello, Temrature!" : {
-
+    "imperial_label" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "IM"
+          }
+        }
+      }
+    },
+    "imperial_unit" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fahrenheit"
+          }
+        }
+      }
+    },
+    "metric_label" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ME"
+          }
+        }
+      }
+    },
+    "metric_unit" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Celsius"
+          }
+        }
+      }
     },
     "navigation_title_search" : {
       "localizations" : {
@@ -23,6 +66,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Temperature"
+          }
+        }
+      }
+    },
+    "no_temprature_found" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select a location"
           }
         }
       }

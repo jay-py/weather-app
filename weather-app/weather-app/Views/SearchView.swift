@@ -7,9 +7,12 @@
 
 import SwiftUI
 import Design
+import Domain
 
 struct SearchView: View {
     @StateObject private var vm = SearchViewModel()
+    @Binding var isPresented: Bool
+    @Binding var result: (temprature: Temprature, location: Locations.Location)?
     
     var body: some View {
         NavigationStack {
@@ -24,12 +27,23 @@ struct SearchView: View {
         )
         .tint(Color.themeColor)
         .searchBarTint()
+        .onReceive(vm.$result, perform: { value in
+            if let value {
+                self.result = value
+                self.isPresented.toggle()
+            }
+        })
     }
     
     var content: some View {
         List(vm.locations) { location in
-            CellView(location: location.name, country: location.country)
-                .listRowSeparator(.hidden)
+            Button(action: {
+                vm.getTemprature(location: location)
+            }, label: {
+                CellView(location: location.name, country: location.country)
+            })
+            .listRowSeparator(.hidden)
+                
             Divider()
         }
         .listStyle(.plain)
@@ -37,5 +51,5 @@ struct SearchView: View {
 }
 
 #Preview {
-    SearchView()
+    SearchView(isPresented: .constant(true), result: .constant(nil))
 }

@@ -20,6 +20,7 @@ public struct CellView: View {
     public var body: some View {
         HStack(spacing: 0) {
             Spacer()
+                .frame(width: 50)
             Text(location)
                 .font(.system(size: 16, weight: .semibold, design: .rounded))
                 .foregroundStyle(Color.fontColor(colorScheme == .light))
@@ -28,7 +29,7 @@ public struct CellView: View {
                 .font(.system(size: 14, weight: .semibold, design: .rounded))
                 .foregroundStyle(Color.fontColor(colorScheme == .light))
             Spacer()
-
+                .frame(width: 50)
         }
     }
 }
