@@ -16,7 +16,7 @@ struct RootView: View {
         case .splash:
             SplashView()
         case .home:
-            Color.red
+            TempratureView()
         case .error:
             Text("error")
         }

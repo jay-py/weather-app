@@ -4,6 +4,39 @@
     "error" : {
 
     },
+    "Hello, Temrature!" : {
+
+    },
+    "navigation_title_search" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search"
+          }
+        }
+      }
+    },
+    "navigation_title_temprature" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temperature"
+          }
+        }
+      }
+    },
+    "search_placeholder" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter a location"
+          }
+        }
+      }
+    },
     "splash_title" : {
       "localizations" : {
         "en" : {
