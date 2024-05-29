@@ -12,7 +12,7 @@
 		267ED2FB2C05FB4D001EEDF5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 267ED2FA2C05FB4D001EEDF5 /* Preview Assets.xcassets */; };
 		267ED3262C060DFE001EEDF5 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 267ED3252C060DFE001EEDF5 /* Localizable.xcstrings */; };
 		267ED3342C0611E4001EEDF5 /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = 267ED3332C0611E4001EEDF5 /* Domain */; };
-		267ED33B2C061DBF001EEDF5 /* Design in Frameworks */ = {isa = PBXBuildFile; productRef = 267ED33A2C061DBF001EEDF5 /* Design */; };
+		26876F202C07B75200B51E29 /* Design in Frameworks */ = {isa = PBXBuildFile; productRef = 26876F1F2C07B75200B51E29 /* Design */; };
 		26C560E22C07905C00BF7127 /* TempratureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C560E12C07905C00BF7127 /* TempratureViewModel.swift */; };
 		26E2FFBA2C066A570069ED38 /* TempratureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E2FFB92C066A570069ED38 /* TempratureView.swift */; };
 		26E2FFBC2C066A6A0069ED38 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E2FFBB2C066A6A0069ED38 /* SearchView.swift */; };
@@ -29,7 +29,7 @@
 		267ED3312C061165001EEDF5 /* Domain */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Domain; path = ../Domain; sourceTree = "<group>"; };
 		267ED3392C061D3E001EEDF5 /* Design */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Design; path = ../Design; sourceTree = "<group>"; };
 		26C560E12C07905C00BF7127 /* TempratureViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempratureViewModel.swift; sourceTree = "<group>"; };
-		26C560E32C07928C00BF7127 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		26C560E32C07928C00BF7127 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		26E2FFB92C066A570069ED38 /* TempratureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempratureView.swift; sourceTree = "<group>"; };
 		26E2FFBB2C066A6A0069ED38 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		26E2FFBD2C06733B0069ED38 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
@@ -40,7 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				267ED33B2C061DBF001EEDF5 /* Design in Frameworks */,
+				26876F202C07B75200B51E29 /* Design in Frameworks */,
 				267ED3342C0611E4001EEDF5 /* Domain in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -70,7 +70,6 @@
 		267ED2F12C05FB4C001EEDF5 /* weather-app */ = {
 			isa = PBXGroup;
 			children = (
-				26C560E32C07928C00BF7127 /* Info.plist */,
 				267ED3212C060D3A001EEDF5 /* Assets */,
 				267ED3222C060D41001EEDF5 /* Main */,
 				267ED3232C060D4B001EEDF5 /* Views */,
@@ -101,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				267ED2F22C05FB4C001EEDF5 /* App.swift */,
+				26C560E32C07928C00BF7127 /* Info.plist */,
 				267ED2F82C05FB4D001EEDF5 /* weather_app.entitlements */,
 			);
 			path = Main;
@@ -150,7 +150,7 @@
 			name = "weather-app";
 			packageProductDependencies = (
 				267ED3332C0611E4001EEDF5 /* Domain */,
-				267ED33A2C061DBF001EEDF5 /* Design */,
+				26876F1F2C07B75200B51E29 /* Design */,
 			);
 			productName = "weather-app";
 			productReference = 267ED2EF2C05FB4C001EEDF5 /* weather-app.app */;
@@ -371,7 +371,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "weather-app/Info.plist";
+				INFOPLIST_FILE = "weather-app/Main/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Debug;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please share your location";
@@ -416,7 +416,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "weather-app/Info.plist";
+				INFOPLIST_FILE = "weather-app/Main/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Debug;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please share your location";
@@ -515,7 +515,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "weather-app/Info.plist";
+				INFOPLIST_FILE = "weather-app/Main/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Debug;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please share your location";
@@ -575,7 +575,7 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = Domain;
 		};
-		267ED33A2C061DBF001EEDF5 /* Design */ = {
+		26876F1F2C07B75200B51E29 /* Design */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Design;
 		};

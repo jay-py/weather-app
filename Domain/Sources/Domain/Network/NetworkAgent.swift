@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  NetworkAgent.swift
 //  
 //
 //  Created by Jean paul Massoud on 2024-05-28.
@@ -54,6 +54,7 @@ extension NetworkAgent {
         responseType: T.Type
     ) async throws -> T {
         #if DEBUG
+        print(">> fetch for \(path.value) from mock data")
             if [1].contains(1) { // surpress warning
                 return try parseResponse(data: T.mockData, responseType: responseType)
             }
@@ -62,7 +63,7 @@ extension NetworkAgent {
         else { throw NetworkError.urlError }
 
         let request = getRequestWithHeaders(url: url, method: method)
-        
+        print(">> fetch for \(path.value)")
         // check the cache
         if let cachedResponse = URLCache.shared.cachedResponse(for: request) {
             print(">> reponse from cache")
@@ -74,9 +75,9 @@ extension NetworkAgent {
         if !response.isOk {
             throw NetworkError.unknown(response.prettyPrint)
         }
+        print(">> \(method.rawValue): \(path.value) \n>> \(String(data: data, encoding: .utf8) ?? "")")
         // parse
         let decoded = try parseResponse(data: data, responseType: responseType)
-        
         // cache
         let cachedResponse = CachedURLResponse(response: response, data: data)
         URLCache.shared.storeCachedResponse(cachedResponse, for: request)

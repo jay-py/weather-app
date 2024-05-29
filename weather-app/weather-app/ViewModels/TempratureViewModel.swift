@@ -11,7 +11,7 @@ import CoreLocation
 
 final class TempratureViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     private let TAG = "TempratureViewModel"
-    private let tempratureRepo = TempratureRepository()
+    private let repo = ApiRepository()
     private let manager = CLLocationManager()
     private var task: Task<Void, Never>? = nil
     private var hasUserLocation: Bool = false
@@ -21,26 +21,28 @@ final class TempratureViewModel: NSObject, ObservableObject, CLLocationManagerDe
     override init() {
         super.init()
         manager.delegate = self
-        requestAuthorisation()
     }
     
     private func requestAuthorisation() {
         if [.denied, .notDetermined].contains(manager.authorizationStatus){
+            print(">> requesting location permission")
             self.manager.requestWhenInUseAuthorization()
         }
     }
     
     
     func requestLocation() {
+        print(">> requesting user's location")
         requestAuthorisation()
         hasUserLocation = false
         manager.requestLocation()
     }
     
     internal func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let coords = locations.first?.coordinate, !hasUserLocation {
+        if let coord = locations.first?.coordinate, !hasUserLocation {
+            print(">> received user's location")
             self.hasUserLocation = true
-            self.getTemprature(for: coords.latitude, lon: coords.longitude)
+            self.getTemprature(for: coord.latitude, lon: coord.longitude)
         }
     }
     
@@ -53,11 +55,12 @@ final class TempratureViewModel: NSObject, ObservableObject, CLLocationManagerDe
         self.task?.cancel()
         self.task = Task {
             do {
-                let res = try await tempratureRepo.getTemprature(lat: lat, lon: lon)
+                let res = try await repo.getTemprature(lat: lat, lon: lon)
                 try Task.checkCancellation()
                 await MainActor.run {
                     self.currentTemprature = res
                 }
+                print(">> success getting temprature for user's location: \(res)")
             }
             catch {
                 if Task.isCancelled {

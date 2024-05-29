@@ -12,8 +12,7 @@ import SwiftUI
 @MainActor
 final class SearchViewModel: ObservableObject {
     private let TAG = "SearchViewModel"
-    private let locationRepo = LocationsRepository()
-    private let tempratureRepo = TempratureRepository()
+    private let repo = ApiRepository()
     private var task: Task<Void, Never>? = nil
     private var bag = Set<AnyCancellable>()
     
@@ -39,9 +38,10 @@ final class SearchViewModel: ObservableObject {
             self.task?.cancel()
             self.task = Task {
                 do {
-                    let res = try await locationRepo.getLocations(name: query)
+                    let res = try await repo.getLocations(name: query)
                     try Task.checkCancellation()
                     setLocations(res.list)
+                    print(">> success getting locations for \(query): \(res.list)")
                 }
                 catch {
                     if Task.isCancelled {
@@ -71,8 +71,9 @@ final class SearchViewModel: ObservableObject {
     func getTemprature(location: Locations.Location) {
         Task {
             do {
-                let temprature = try await tempratureRepo.getTemprature(lat: location.lat, lon: location.lon)
+                let temprature = try await repo.getTemprature(lat: location.lat, lon: location.lon)
                 self.result = temprature
+                print(">> success getting temprature for \(location): \(temprature)")
             }
             catch {
                 print("\(TAG).getTemprature() error: ", error)
