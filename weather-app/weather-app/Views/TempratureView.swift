@@ -14,7 +14,7 @@ struct TempratureView: View {
     @State private var isSheetPresented: Bool = false
     @State private var isMetric: Bool = true
     @State private var data: Temprature?
-
+    
     var body: some View {
         NavigationStack {
             content
@@ -64,7 +64,7 @@ struct TempratureView: View {
             .foregroundStyle(Color.fontColor(isLightMode))
             .frame(maxWidth: .infinity)
     }
-
+    
     func tempratureText(_ temprature: Temprature) -> some View {
         VStack(spacing: 0) {
             Text(temprature.name)
@@ -74,12 +74,14 @@ struct TempratureView: View {
             Spacer()
                 .frame(height: 24)
             Text("\(isMetric ? temprature.metricTemp : temprature.imperialTemp) ")
+                .font(.system(size: 24, weight: .bold, design: .rounded))
             + Text(isMetric ? "metric_unit" : "imperial_unit")
+                .font(.system(size: 16, weight: .semibold, design: .rounded))
         }
         .foregroundStyle(Color.fontColor(isLightMode))
         .frame(maxWidth: .infinity)
     }
-
+    
     
     var toolBarButton: some View {
         Button {
@@ -103,26 +105,29 @@ struct TempratureView: View {
             }
             floatingLocationButton
                 .padding([.bottom, .top])
-            HStack {
-                Spacer()
-                Button(action: {
-                    isSheetPresented.toggle()
-                }) {
-                    Image(systemName: "location.magnifyingglass")
-                        .resizable()
-                        .frame(width: 24, height: 24)
-                        .padding()
-                        .background(Color.themeColor)
-                        .foregroundColor(.white)
-                        .clipShape(Circle())
-                        .shadow(color: .gray.opacity(0.6), radius: 10)
-                    
-                }
-            }
-            .padding([.bottom, .top])
-            
+            floatingSearchButton
+                .padding([.bottom, .top])
         }
         .padding([.trailing])
+    }
+    
+    var floatingSearchButton: some View {
+        HStack {
+            Spacer()
+            Button(action: {
+                isSheetPresented.toggle()
+            }) {
+                Image(systemName: "location.magnifyingglass")
+                    .resizable()
+                    .frame(width: 24, height: 24)
+                    .padding()
+                    .background(Color.themeColor)
+                    .foregroundColor(.white)
+                    .clipShape(Circle())
+                    .shadow(color: .gray.opacity(0.6), radius: 10)
+                
+            }
+        }
     }
     
     var floatingConvertButton: some View {

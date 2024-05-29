@@ -43,7 +43,6 @@ struct SearchView: View {
                 CellView(location: location.name, country: location.country)
             })
             .listRowSeparator(.hidden)
-                
             Divider()
         }
         .listStyle(.plain)
