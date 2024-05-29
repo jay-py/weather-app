@@ -7,9 +7,6 @@
     "%@ " : {
 
     },
-    "error" : {
-
-    },
     "imperial_label" : {
       "localizations" : {
         "en" : {
@@ -86,16 +83,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enter a location"
-          }
-        }
-      }
-    },
-    "splash_title" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Weather APP"
           }
         }
       }

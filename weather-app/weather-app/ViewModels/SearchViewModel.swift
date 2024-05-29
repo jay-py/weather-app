@@ -12,17 +12,15 @@ import SwiftUI
 @MainActor
 final class SearchViewModel: ObservableObject {
     private let TAG = "SearchViewModel"
-    private var bag = Set<AnyCancellable>()
     private let locationRepo = LocationsRepository()
     private let tempratureRepo = TempratureRepository()
-
     private var task: Task<Void, Never>? = nil
+    private var bag = Set<AnyCancellable>()
     
     @Published private(set) var locations = [Locations.Location]()
+    @Published private(set) var result: Temprature? = nil
     @Published var query: String = ""
-    @Published var result: Temprature? = nil
-    private var storedLocations = [Locations.Location]()
-
+    
     init() {
         $query
             .receive(on: DispatchQueue.main)
@@ -33,7 +31,7 @@ final class SearchViewModel: ObservableObject {
             }
             .store(in: &bag)
     }
-
+    
     private func fetchLocations(query: String) {
         if query.isEmpty {
             self.setLocations(nil)
@@ -56,7 +54,7 @@ final class SearchViewModel: ObservableObject {
             }
         }
     }
-
+    
     private func setLocations(_ locations: [Locations.Location]? = nil) {
         withAnimation {
             if let res = locations {

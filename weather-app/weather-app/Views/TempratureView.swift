@@ -52,10 +52,14 @@ struct TempratureView: View {
                 self.data = data
             }
         })
-        .onAppear(perform: {
+        .onAppear {
             vm.requestLocation()
-        })
+        }
     }
+}
+
+// view components
+extension TempratureView {
     
     var noTempratureText: some View {
         Text("no_temprature_found")
@@ -165,7 +169,6 @@ struct TempratureView: View {
             }
         }
     }
-    
 }
 
 #Preview {

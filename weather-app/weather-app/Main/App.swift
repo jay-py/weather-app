@@ -15,7 +15,7 @@ struct app: App {
     
     var body: some Scene {
         WindowGroup {
-            RootView()
+            TempratureView()
         }
     }
     
