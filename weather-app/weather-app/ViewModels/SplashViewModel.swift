@@ -19,7 +19,6 @@ final class SplashViewModel: ObservableObject {
     }
 
     // simulating some fetch that is needed to load the app
-    // should be blocking main thread since the app state is dependent on the result
     @MainActor
     func fetchData() async {
         defer {

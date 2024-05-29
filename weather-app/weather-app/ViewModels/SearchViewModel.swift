@@ -20,7 +20,7 @@ final class SearchViewModel: ObservableObject {
     
     @Published private(set) var locations = [Locations.Location]()
     @Published var query: String = ""
-    @Published var result: (temprature: Temprature, location: Locations.Location)? = nil
+    @Published var result: Temprature? = nil
     private var storedLocations = [Locations.Location]()
 
     init() {
@@ -34,7 +34,7 @@ final class SearchViewModel: ObservableObject {
             .store(in: &bag)
     }
 
-    internal func fetchLocations(query: String) {
+    private func fetchLocations(query: String) {
         if query.isEmpty {
             self.setLocations(nil)
         } else {
@@ -42,11 +42,16 @@ final class SearchViewModel: ObservableObject {
             self.task = Task {
                 do {
                     let res = try await locationRepo.getLocations(name: query)
+                    try Task.checkCancellation()
                     setLocations(res.list)
-                    self.locations = res.list
                 }
                 catch {
-                    print("\(TAG).fetchLocations() error: ", error)
+                    if Task.isCancelled {
+                        print("\(TAG).fetchLocations() is canceled")
+                    }
+                    else {
+                        print("\(TAG).fetchLocations() error: ", error)
+                    }
                 }
             }
         }
@@ -65,12 +70,11 @@ final class SearchViewModel: ObservableObject {
         }
     }
     
-    @MainActor
     func getTemprature(location: Locations.Location) {
         Task {
             do {
                 let temprature = try await tempratureRepo.getTemprature(lat: location.lat, lon: location.lon)
-                self.result = (temprature, location)
+                self.result = temprature
             }
             catch {
                 print("\(TAG).getTemprature() error: ", error)

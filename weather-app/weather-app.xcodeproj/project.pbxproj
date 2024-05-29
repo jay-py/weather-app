@@ -17,6 +17,7 @@
 		267ED3342C0611E4001EEDF5 /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = 267ED3332C0611E4001EEDF5 /* Domain */; };
 		267ED3362C061645001EEDF5 /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267ED3352C061645001EEDF5 /* SplashViewModel.swift */; };
 		267ED33B2C061DBF001EEDF5 /* Design in Frameworks */ = {isa = PBXBuildFile; productRef = 267ED33A2C061DBF001EEDF5 /* Design */; };
+		26C560E22C07905C00BF7127 /* TempratureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C560E12C07905C00BF7127 /* TempratureViewModel.swift */; };
 		26E2FFBA2C066A570069ED38 /* TempratureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E2FFB92C066A570069ED38 /* TempratureView.swift */; };
 		26E2FFBC2C066A6A0069ED38 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E2FFBB2C066A6A0069ED38 /* SearchView.swift */; };
 		26E2FFBE2C06733B0069ED38 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E2FFBD2C06733B0069ED38 /* SearchViewModel.swift */; };
@@ -35,6 +36,8 @@
 		267ED3312C061165001EEDF5 /* Domain */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Domain; path = ../Domain; sourceTree = "<group>"; };
 		267ED3352C061645001EEDF5 /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
 		267ED3392C061D3E001EEDF5 /* Design */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Design; path = ../Design; sourceTree = "<group>"; };
+		26C560E12C07905C00BF7127 /* TempratureViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempratureViewModel.swift; sourceTree = "<group>"; };
+		26C560E32C07928C00BF7127 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		26E2FFB92C066A570069ED38 /* TempratureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempratureView.swift; sourceTree = "<group>"; };
 		26E2FFBB2C066A6A0069ED38 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		26E2FFBD2C06733B0069ED38 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
@@ -75,6 +78,7 @@
 		267ED2F12C05FB4C001EEDF5 /* weather-app */ = {
 			isa = PBXGroup;
 			children = (
+				26C560E32C07928C00BF7127 /* Info.plist */,
 				267ED3212C060D3A001EEDF5 /* Assets */,
 				267ED3222C060D41001EEDF5 /* Main */,
 				267ED3232C060D4B001EEDF5 /* Views */,
@@ -127,6 +131,7 @@
 				267ED32D2C061103001EEDF5 /* RootViewModel.swift */,
 				267ED3352C061645001EEDF5 /* SplashViewModel.swift */,
 				26E2FFBD2C06733B0069ED38 /* SearchViewModel.swift */,
+				26C560E12C07905C00BF7127 /* TempratureViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -239,6 +244,7 @@
 				267ED3362C061645001EEDF5 /* SplashViewModel.swift in Sources */,
 				267ED2F52C05FB4C001EEDF5 /* RootView.swift in Sources */,
 				267ED2F32C05FB4C001EEDF5 /* App.swift in Sources */,
+				26C560E22C07905C00BF7127 /* TempratureViewModel.swift in Sources */,
 				26E2FFBC2C066A6A0069ED38 /* SearchView.swift in Sources */,
 				26E2FFBA2C066A570069ED38 /* TempratureView.swift in Sources */,
 				26E2FFBE2C06733B0069ED38 /* SearchViewModel.swift in Sources */,
@@ -381,8 +387,10 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "$(DISPLAY_NAME)";
+				INFOPLIST_FILE = "weather-app/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Debug;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please share your location";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -424,8 +432,10 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "$(DISPLAY_NAME)";
+				INFOPLIST_FILE = "weather-app/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Debug;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please share your location";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -521,8 +531,10 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "$(DISPLAY_NAME)";
+				INFOPLIST_FILE = "weather-app/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Debug;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please share your location";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;

@@ -12,7 +12,7 @@ import Domain
 struct SearchView: View {
     @StateObject private var vm = SearchViewModel()
     @Binding var isPresented: Bool
-    @Binding var result: (temprature: Temprature, location: Locations.Location)?
+    @Binding var result: Temprature?
     
     var body: some View {
         NavigationStack {

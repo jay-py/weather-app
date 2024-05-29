@@ -11,9 +11,13 @@ public struct Temprature: BaseModel {
 
     public let id = UUID()
     public let main: Main
+    public let sys: Sys
+    public let name: String
 
     enum CodingKeys: String, CodingKey {
         case main = "main"
+        case sys = "sys"
+        case name = "name"
     }
     
     public struct Main: BaseModel {
@@ -22,6 +26,15 @@ public struct Temprature: BaseModel {
 
         enum CodingKeys: String, CodingKey {
             case temp = "temp"
+        }
+    }
+    
+    public struct Sys: BaseModel {
+        public let id = UUID()
+        public let country: String
+
+        enum CodingKeys: String, CodingKey {
+            case country = "country"
         }
     }
     
@@ -37,15 +50,25 @@ public struct Temprature: BaseModel {
         }
     }
     
+    public var country: String {
+        get {
+            return sys.country
+        }
+    }
+    
 }
 
 #if DEBUG
 extension Temprature {
     static var mockData: Data! = """
     {
-      "main": {
-          "temp": 298.48,
-        }
+        "main": {
+              "temp": 298.48,
+            },
+        "sys": {
+            "country": "FR"
+            },
+        "name": "paris"
     }
     """.data(using: .utf8)
 }
@@ -53,6 +76,13 @@ extension Temprature {
 
 #if DEBUG
 extension Temprature.Main {
+    static var mockData: Data! = nil
+}
+#endif
+
+
+#if DEBUG
+extension Temprature.Sys {
     static var mockData: Data! = nil
 }
 #endif

@@ -10,9 +10,10 @@ import Domain
 
 struct TempratureView: View {
     @AppStorage("isLightMode") private var isLightMode: Bool = false
+    @StateObject private var vm = TempratureViewModel()
     @State private var isSheetPresented: Bool = false
     @State private var isMetric: Bool = true
-    @State private var data: (temprature: Temprature, location: Locations.Location)?
+    @State private var data: Temprature?
 
     var body: some View {
         NavigationStack {
@@ -32,7 +33,7 @@ struct TempratureView: View {
         VStack {
             Spacer()
             if let data {
-                tempratureText(data.temprature, data.location)
+                tempratureText(data)
             }
             else {
                 noTempratureText
@@ -46,6 +47,14 @@ struct TempratureView: View {
             SearchView(isPresented: $isSheetPresented, result: $data)
                 .presentationDetents([.medium])
         }
+        .onReceive(vm.$currentTemprature, perform: { data in
+            if let data {
+                self.data = data
+            }
+        })
+        .onAppear(perform: {
+            vm.requestLocation()
+        })
     }
     
     var noTempratureText: some View {
@@ -56,11 +65,11 @@ struct TempratureView: View {
             .frame(maxWidth: .infinity)
     }
 
-    func tempratureText(_ temprature: Temprature, _ location: Locations.Location) -> some View {
+    func tempratureText(_ temprature: Temprature) -> some View {
         VStack(spacing: 0) {
-            Text(location.name)
+            Text(temprature.name)
                 .font(.system(size: 16, weight: .semibold, design: .rounded))
-            + Text(" (\(location.country))")
+            + Text(" (\(temprature.country))")
                 .font(.system(size: 14, weight: .semibold, design: .rounded))
             Spacer()
                 .frame(height: 24)
@@ -92,6 +101,8 @@ struct TempratureView: View {
                 floatingConvertButton
                     .padding(.bottom)
             }
+            floatingLocationButton
+                .padding([.bottom, .top])
             HStack {
                 Spacer()
                 Button(action: {
@@ -105,11 +116,13 @@ struct TempratureView: View {
                         .foregroundColor(.white)
                         .clipShape(Circle())
                         .shadow(color: .gray.opacity(0.6), radius: 10)
-                        
+                    
                 }
             }
+            .padding([.bottom, .top])
+            
         }
-        .padding([.bottom, .trailing])
+        .padding([.trailing])
     }
     
     var floatingConvertButton: some View {
@@ -129,6 +142,25 @@ struct TempratureView: View {
             }
         }
     }
+    
+    var floatingLocationButton: some View {
+        HStack {
+            Spacer()
+            Button(action: {
+                vm.requestLocation()
+            }) {
+                Image(systemName: "location.fill")
+                    .resizable()
+                    .frame(width: 24, height: 24)
+                    .padding()
+                    .background(Color.themeColor)
+                    .foregroundColor(.white)
+                    .clipShape(Circle())
+                    .shadow(color: .gray.opacity(0.6), radius: 10)
+            }
+        }
+    }
+    
 }
 
 #Preview {
