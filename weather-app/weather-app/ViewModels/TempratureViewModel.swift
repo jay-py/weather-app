@@ -14,35 +14,46 @@ final class TempratureViewModel: NSObject, ObservableObject, CLLocationManagerDe
     private let repo = ApiRepository()
     private let manager = CLLocationManager()
     private var task: Task<Void, Never>? = nil
-    private var hasUserLocation: Bool = false
+    private var storedCoord: CLLocationCoordinate2D? = nil
     
     @Published private(set) var currentTemprature: Temprature?
+    
+    private let minDistance = 500.0 // meters
     
     override init() {
         super.init()
         manager.delegate = self
+        manager.desiredAccuracy = kCLLocationAccuracyHundredMeters
     }
     
-    private func requestAuthorisation() {
+    func requestLocation() {
+        print(">> requesting user's location")
+        manager.requestLocation()
+    }
+    
+    func stopMonitoringLocationChanges() {
+        manager.stopMonitoringSignificantLocationChanges()
+    }
+    
+    internal func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         if [.denied, .notDetermined].contains(manager.authorizationStatus){
             print(">> requesting location permission")
             self.manager.requestWhenInUseAuthorization()
         }
-    }
-    
-    
-    func requestLocation() {
-        print(">> requesting user's location")
-        requestAuthorisation()
-        hasUserLocation = false
-        manager.requestLocation()
+        else {
+            print(">> location permission granted")
+            manager.startMonitoringSignificantLocationChanges()
+            manager.requestLocation()
+        }
     }
     
     internal func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let coord = locations.first?.coordinate, !hasUserLocation {
+        manager.stopUpdatingLocation()
+        if let newCoord = locations.first?.coordinate,
+           shouldUpdateCurrentLocationTemprature(oldCoord: self.storedCoord, newCoord: newCoord){
             print(">> received user's location")
-            self.hasUserLocation = true
-            self.getTemprature(for: coord.latitude, lon: coord.longitude)
+            self.storedCoord = newCoord
+            self.getTemprature(for: newCoord.latitude, lon: newCoord.longitude)
         }
     }
     
@@ -50,8 +61,17 @@ final class TempratureViewModel: NSObject, ObservableObject, CLLocationManagerDe
         print("\(TAG) CL manager error: ", error.localizedDescription)
     }
     
+    private func shouldUpdateCurrentLocationTemprature(oldCoord: CLLocationCoordinate2D?, newCoord: CLLocationCoordinate2D) -> Bool {
+        guard let oldCoord else { return true }
+        let oldLocation = CLLocation(latitude: oldCoord.latitude, longitude: oldCoord.longitude)
+        let newLocation = CLLocation(latitude: newCoord.latitude, longitude: newCoord.longitude)
+        let distance = oldLocation.distance(from: newLocation)
+        print(">> should update current location temprature: ", distance > minDistance)
+        return distance > minDistance
+    }
     
     private func getTemprature(for lat: Double, lon: Double) {
+        print(">> getting temprature for user's location")
         self.task?.cancel()
         self.task = Task {
             do {

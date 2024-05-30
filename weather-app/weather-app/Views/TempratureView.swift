@@ -52,9 +52,6 @@ struct TempratureView: View {
                 self.data = data
             }
         })
-        .onAppear {
-            vm.requestLocation()
-        }
     }
 }
 
@@ -119,6 +116,7 @@ extension TempratureView {
         HStack {
             Spacer()
             Button(action: {
+                vm.stopMonitoringLocationChanges()
                 isSheetPresented.toggle()
             }) {
                 Image(systemName: "location.magnifyingglass")
