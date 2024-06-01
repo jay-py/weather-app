@@ -11,16 +11,16 @@ public actor ApiRepository {
 
     public init() {}
 
-    public func getLocations(name: String) async throws -> Locations {
+    public func getLocations(query: String) async throws -> Locations {
         return try await NetworkAgent.fetchData(
-            path: .search(name),
+            path: .searchLocation(query: query),
             responseType: Locations.self
         )
     }
     
     public func getTemprature(lat: Double, lon: Double) async throws -> Temprature {
         return try await NetworkAgent.fetchData(
-            path: .temp(lat: lat, lon: lon),
+            path: .tempFor(lat: lat, lon: lon),
             responseType: Temprature.self
         )
     }

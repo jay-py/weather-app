@@ -10,9 +10,9 @@ import Foundation
 public struct Temprature: BaseModel {
 
     public let id = UUID()
-    public let main: Main
-    public let sys: Sys
     public let name: String
+    fileprivate let main: Main
+    fileprivate let sys: Sys
 
     enum CodingKeys: String, CodingKey {
         case main = "main"
@@ -20,7 +20,7 @@ public struct Temprature: BaseModel {
         case name = "name"
     }
     
-    public struct Main: BaseModel {
+    fileprivate struct Main: BaseModel {
         public let id = UUID()
         public let temp: Double
 
@@ -29,7 +29,7 @@ public struct Temprature: BaseModel {
         }
     }
     
-    public struct Sys: BaseModel {
+    fileprivate struct Sys: BaseModel {
         public let id = UUID()
         public let country: String
 
@@ -37,7 +37,10 @@ public struct Temprature: BaseModel {
             case country = "country"
         }
     }
-    
+}
+
+// calculated properties
+extension Temprature {
     public var metricTemp: String {
         get {
             return String(format: "%.2f", self.main.temp - 273.15)
@@ -55,7 +58,6 @@ public struct Temprature: BaseModel {
             return sys.country
         }
     }
-    
 }
 
 #if DEBUG

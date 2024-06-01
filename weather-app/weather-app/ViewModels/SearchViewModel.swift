@@ -38,7 +38,7 @@ final class SearchViewModel: ObservableObject {
             self.task?.cancel()
             self.task = Task {
                 do {
-                    let res = try await repo.getLocations(name: query)
+                    let res = try await repo.getLocations(query: query)
                     try Task.checkCancellation()
                     setLocations(res.list)
                     print(">> success getting locations for \(query): \(res.list)")

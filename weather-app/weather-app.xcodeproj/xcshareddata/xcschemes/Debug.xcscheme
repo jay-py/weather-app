@@ -46,7 +46,7 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "267ED3092C05FB4D001EEDF5"
+               BlueprintIdentifier = "26170A252C08CEA30078EE29"
                BuildableName = "weather-appUITests.xctest"
                BlueprintName = "weather-appUITests"
                ReferencedContainer = "container:weather-app.xcodeproj">
@@ -74,6 +74,10 @@
             ReferencedContainer = "container:weather-app.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <LocationScenarioReference
+         identifier = "Berlin, Germany"
+         referenceType = "1">
+      </LocationScenarioReference>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Debug"
