@@ -47,6 +47,9 @@ struct TempratureView: View {
             SearchView(isPresented: $isSheetPresented, result: $data)
                 .presentationDetents([.medium])
         }
+        .alert(isPresented: $vm.showAlert, content: {
+            alert
+        })
         .onReceive(vm.$currentTemprature, perform: { data in
             if let data {
                 self.data = data
@@ -166,6 +169,14 @@ extension TempratureView {
                     .shadow(color: .gray.opacity(0.6), radius: 10)
             }
         }
+    }
+    
+    var alert: Alert {
+        Alert(
+            title: Text("alert_title"),
+            message: Text("alert_body"),
+            dismissButton: .default(Text("alert_button"))
+        )
     }
 }
 

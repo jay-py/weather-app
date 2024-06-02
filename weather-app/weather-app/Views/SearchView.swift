@@ -27,6 +27,9 @@ struct SearchView: View {
         )
         .tint(Color.themeColor)
         .searchBarTint()
+        .alert(isPresented: $vm.showAlert, content: {
+            alert
+        })
         .onReceive(vm.$temprature, perform: { value in
             if let value {
                 self.result = value
@@ -46,6 +49,14 @@ struct SearchView: View {
             Divider()
         }
         .listStyle(.plain)
+    }
+    
+    var alert: Alert {
+        Alert(
+            title: Text("alert_title"),
+            message: Text("alert_body"),
+            dismissButton: .default(Text("alert_button"))
+        )
     }
 }
 

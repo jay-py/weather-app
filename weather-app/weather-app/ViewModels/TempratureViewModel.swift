@@ -17,6 +17,7 @@ final class TempratureViewModel: NSObject, ObservableObject, CLLocationManagerDe
     private var storedCoord: CLLocationCoordinate2D? = nil
     
     @Published private(set) var currentTemprature: Temprature?
+    @Published internal var showAlert: Bool = false
     
     private let minDistance = 500.0 // meters
     
@@ -87,6 +88,7 @@ final class TempratureViewModel: NSObject, ObservableObject, CLLocationManagerDe
                     print("\(TAG).getTemprature() is canceled")
                 }
                 else {
+                    showAlert = true
                     print("\(TAG).getTemprature() error: ", error)
                 }
             }

@@ -7,6 +7,36 @@
     "%@ " : {
 
     },
+    "alert_body" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Something went wrong! Try again later"
+          }
+        }
+      }
+    },
+    "alert_button" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No worries"
+          }
+        }
+      }
+    },
+    "alert_title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error"
+          }
+        }
+      }
+    },
     "imperial_label" : {
       "localizations" : {
         "en" : {

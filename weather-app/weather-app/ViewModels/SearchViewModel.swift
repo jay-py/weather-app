@@ -19,6 +19,7 @@ final class SearchViewModel: ObservableObject {
     @Published private(set) var locations = [Locations.Location]()
     @Published private(set) var temprature: Temprature? = nil
     @Published var query: String = ""
+    @Published internal var showAlert: Bool = false
     
     init() {
         $query
@@ -48,6 +49,7 @@ final class SearchViewModel: ObservableObject {
                         print("\(TAG).fetchLocations() is canceled")
                     }
                     else {
+                        showAlert = true
                         print("\(TAG).fetchLocations() error: ", error)
                     }
                 }
@@ -76,6 +78,7 @@ final class SearchViewModel: ObservableObject {
                 print(">> success getting temprature for \(location): \(temprature)")
             }
             catch {
+                showAlert = true
                 print("\(TAG).getTemprature() error: ", error)
             }
         }
